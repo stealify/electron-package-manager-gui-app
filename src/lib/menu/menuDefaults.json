@@ -1,0 +1,39 @@
+{
+  "app": {
+    "About {{titleBarName}}": [null, "about"],
+    "__separator0": "__separator",
+    "Services": {
+      "__role": "services"
+    },
+    "Hide {{titleBarName}}": ["Command+H", "hide"],
+    "Hide Others": ["Command+Shift+H", "hideothers"],
+    "Show All": [null, "unhide"],
+    "__separator1": "__separator",
+    "Quit": ["Command+Q", null, "onQuit"]
+  },
+  "edit": {
+    "Undo": ["CmdOrCtrl+Z", "undo"],
+    "Redo": ["Shift+CmdOrCtrl+Z", "redo"],
+    "__separator0": "__separator",
+    "Cut": ["CmdOrCtrl+X", "cut"],
+    "Copy": ["CmdOrCtrl+C", "copy"],
+    "Paste": ["CmdOrCtrl+V", "paste"],
+    "Select All": ["CmdOrCtrl+A", "selectall"]
+  },
+  "view": {
+    "Toggle Full Screen": [{
+        "default": "F11",
+        "mac": "Ctrl+Command+F"
+      }, null, "onToggleFullScreen"]
+  },
+  "window": {
+    "__role": "window",
+    "Minimize": ["CmdOrCtrl+M", "minimize"],
+    "__macOnly": {
+      "Bring All to Front": [null, "front"]
+    }
+  },
+  "help": {
+    "__role": "help"
+  }
+}

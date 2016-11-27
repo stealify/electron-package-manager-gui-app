@@ -1,0 +1,25 @@
+{
+  "__macOnly": {
+    "{{titleBarName}}": {
+      "__default": "app",
+      "About {{titleBarName}}": "wantsAbout"
+    }
+  },
+  "Edit": {
+    "__default": "edit"
+  },
+  "View": {
+    "__default": "view",
+    "Toggle Developer Tools": "toggleDevTools"
+  },
+  "Window": {
+    "__default": "window",
+    "Close Window": ["CmdOrCtrl+W", null, "closeWindow"]
+  },
+  "Help": {
+    "__default": "help",
+    "__exceptMac": {
+      "About {{titleBarName}}": "wantsAbout"
+    }
+  }
+}

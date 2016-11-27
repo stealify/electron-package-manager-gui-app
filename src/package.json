@@ -1,0 +1,34 @@
+{
+  "name": "pipam",
+  "version": "1.0.0",
+  "description": "Pipam - The pluginable interface for package managers",
+  "main": "index.js",
+  "productName": "Pipam",
+  "scripts": {
+    "start": "../node_modules/.bin/electron index.js",
+    "build": "node ../scripts/build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pipam/pipam.git"
+  },
+  "author": {
+    "name": "facekapow",
+    "email": "facekapow@outlook.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pipam/pipam/issues"
+  },
+  "homepage": "https://github.com/pipam/pipam#readme",
+  "dependencies": {
+    "babel-polyfill": "^6.16.0",
+    "command-exists": "^1.0.2",
+    "electron-squirrel-startup": "^1.0.0",
+    "getos": "^2.8.2",
+    "mustache": "^2.2.1",
+    "npm": "^3.10.8",
+    "tar": "^2.2.1",
+    "then-utils": "^1.4.0"
+  }
+}

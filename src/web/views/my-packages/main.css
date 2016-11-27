@@ -1,0 +1,127 @@
+#myPackages--cardCont {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#myPackages--cardCont.no-scroll {
+  overflow: hidden;
+}
+
+#myPackages--cardCont-placeholder {
+  width: 0%;
+  height: 0%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--components-secondary-color-contrast);
+  font-size: 2em;
+  -webkit-user-select: none;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 100;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-property: opacity, width, height, background-color;
+}
+
+#myPackages--cardCont-placeholder.shown {
+  opacity: 1;
+  pointer-events: auto;
+  width: 100%;
+  height: 100%;
+  background-color: var(--components-primary-color);
+}
+
+#myPackages--top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1.5em;
+  padding: 0.25em;
+  background-color: var(--components-secondary-color-contrast);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s opacity ease-in-out;
+  box-shadow: 0 0 10px var(--components-primary-color-contrast);
+  z-index: 60;
+}
+
+#myPackages--top-bar.shown {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#myPackages--cardCont .component.card {
+  flex-grow: 1;
+  max-width: calc(50% - 1em);
+  height: auto;
+}
+
+#myPackages--optCont {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 2.5em;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-property: top, left, right, bottom, width, height, font-size;
+  z-index: 50;
+  background-color: var(--components-primary-color);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+#myPackages--optCont > * {
+  flex-grow: 1;
+}
+
+#myPackages--shadow {
+  position: absolute;
+  left: 0;
+  top: 2em;
+  height: 1em;
+  width: 100%;
+  box-shadow: 0 0 15px #000;
+  z-index: 10;
+  transition: 0.2s top ease-in-out;
+}
+
+#myPackages--top-bar.shown + #myPackages--optCont + #myPackages--shadow {
+  top: 3.5em;
+}
+
+#pageCont {
+  padding-top: 3em;
+  transition-property: opacity, padding-top;
+}
+
+#pageCont.barShown {
+  padding-top: 4.5em;
+}
+
+#myPackages--top-bar.shown + #myPackages--optCont {
+  top: 1.5em;
+}
+
+#myPackages--optCont-view, #myPackages--optCont-listType {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+#myPackages--optCont-viewDropdown, #myPackages--optCont-listTypeDropdown {
+  display: inline-block;
+}
+
+.component.card.my-packages--pkg-card .card--header {
+  display: flex;
+  align-items: center;
+}

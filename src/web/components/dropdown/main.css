@@ -1,0 +1,105 @@
+.component.dropdown {
+  width: 9em;
+  height: 1.5em;
+  overflow: hidden;
+  border: 0.1em solid var(--components-secondary-color);
+  transition-property: box-shadow, background-color, border-color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  box-shadow: 0 0 10px var(--components-primary-color-contrast);
+  background-color: var(--components-primary-color);
+  color: var(--components-secondary-color);
+  position: relative;
+  margin: 0.5em;
+  font-size: 1.2em;
+}
+
+.component.dropdown::after {
+  position: absolute;
+  right: 0.25em;
+  top: 50%;
+  content: '';
+  border: 0.25em solid transparent;
+  border-top-color: var(--components-secondary-color);
+  transition: 0.2s border-top-color ease-in-out;
+}
+
+.component.dropdown.disabled {
+  background-color: var(--components-primary-color) !important;
+  color: var(--components-secondary-color-contrast) !important;
+  border-color: var(--components-secondary-color-contrast) !important;
+  box-shadow: 0 0 7px var(--components-secondary-color-contrast) !important;
+}
+
+.component.dropdown.disabled::after {
+  border-top-color: var(--components-secondary-color-contrast) !important;
+}
+
+.component.dropdown:hover {
+  box-shadow: 0 0 15px var(--components-primary-color-contrast);
+  background-color: var(--components-secondary-color);
+  color: var(--components-primary-color);
+}
+
+.component.dropdown:hover::after {
+  border-top-color: var(--components-primary-color);
+}
+
+.component.dropdown:active {
+  box-shadow: 0 0 10px var(--components-primary-color-contrast);
+}
+
+.component.dropdown select {
+  width: 100%;
+  padding: 0.25em;
+  border: none;
+  border-radius: 0;
+  height: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none !important;
+  background-color: inherit;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* contrast when it's inside another component */
+.component .component.dropdown {
+  border-color: var(--components-primary-color);
+  background-color: var(--components-secondary-color);
+  color: var(--components-primary-color);
+}
+
+.component .component.dropdown::after {
+  border-top-color: var(--components-primary-color);
+}
+
+.component .component.dropdown:hover {
+  background-color: var(--components-primary-color);
+  color: var(--components-secondary-color);
+}
+
+.component .component.dropdown:hover::after {
+  border-top-color: var(--components-secondary-color);
+}
+
+/* if it's on a primary bg component (e.g. card body), reset it */
+.component.primary-bg .component.dropdown {
+  border-color: var(--components-secondary-color);
+  background-color: var(--components-primary-color);
+  color: var(--components-secondary-color);
+}
+
+.component.primary-bg .component.dropdown::after {
+  border-top-color: var(--components-secondary-color);
+}
+
+.component.primary-bg .component.dropdown:hover {
+  background-color: var(--components-secondary-color);
+  color: var(--components-primary-color);
+}
+
+.component.primary-bg .component.dropdown:hover::after {
+  border-top-color: var(--components-primary-color);
+}

@@ -1,0 +1,27 @@
+[
+  {
+    "name": "My Packages",
+    "index": 0,
+    "path": "../views/my-packages/index.html"
+  },
+  {
+    "name": "Install",
+    "index": 1,
+    "path": "../views/install/index.html"
+  },
+  {
+    "name": "Update",
+    "index": 2,
+    "path": "../views/update/index.html"
+  },
+  {
+    "name": "Uninstall",
+    "index": 3,
+    "path": "../views/uninstall/index.html"
+  },
+  {
+    "name": "Manage",
+    "index": 4,
+    "path": "../views/manage/index.html"
+  }
+]

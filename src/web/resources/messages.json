@@ -1,0 +1,20 @@
+{
+  "resCodes": {
+    "204": [
+      "Nope.",
+      "No results 😕"
+    ],
+    "404": [
+      "Well, nope. Couldn't find anything",
+      "Nada, zero, zilch, nothing",
+      "Uh-uh",
+      "Ok! I found exactly... zero results 😐"
+    ],
+    "500": [
+      "Something weird happened 😕",
+      "Welp, I think something blew up back here",
+      "😵",
+      "*cough*, *wheeze*, *dead*"
+    ]
+  }
+}

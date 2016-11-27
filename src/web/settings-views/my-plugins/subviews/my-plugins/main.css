@@ -1,0 +1,10 @@
+#settings--plugins-myPlugins-cardCont {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-flow: row wrap;
+}
+
+.settings--plugins-myPlugins-uninstallButton {
+  /*float: right;*/
+}

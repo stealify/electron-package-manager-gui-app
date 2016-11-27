@@ -1,0 +1,43 @@
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>About</title>
+    <link href="../theme.css" rel="stylesheet" type="text/css"/>
+    <link href="../components/include.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/titlebar.css" rel="stylesheet" type="text/css"/>
+    <link href="main.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <div id="titlebar" class="component shadow">
+      <div id="titlebar--window-controls">
+        <div id="titlebar--close-window" class="window-control"></div>
+        <div id="titlebar--minimize-window" class="window-control"><div></div></div>
+        <div id="titlebar--maximize-window" class="window-control"><div></div></div>
+      </div>
+      <div id="titlebar--title">About</div>
+    </div>
+    <div id="aboutCont">
+      <div id="aboutHeader">
+        <span id="aboutHeading">Pipam</span>
+        <span id="versionHeading">v0.0.0</span>
+        <hr id="header--bottomLine">
+      </div>
+      <div id="authorsCont">
+        <div id="authorsHeader">
+          <span id="authorsHeading" class="about--subheading">Author</span>
+        </div>
+        <div id="authorsCards"></div>
+      </div>
+      <div id="ossCont">
+        <div id="ossHeader">
+          <span id="ossHeading" class="about--subheading">Open Source Software Used</span>
+        </div>
+        <div id="ossCards"></div>
+      </div>
+    </div>
+    <script src="startup.js"></script>
+    <script>requireNoCache('./main.js');</script>
+  </body>
+</html>

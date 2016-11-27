@@ -1,0 +1,12 @@
+{
+  "name": "command-exists-dts",
+  "version": "1.0.0",
+  "description": "TypeScript definition for command-exists",
+  "keywords": [
+    "command-exists",
+    "dts"
+  ],
+  "author": "facekapow",
+  "license": "MIT",
+  "typings": "index.d.ts"
+}

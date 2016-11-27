@@ -1,0 +1,26 @@
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Log</title>
+    <link href="../theme.css" rel="stylesheet" type="text/css"/>
+    <link href="../components/include.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/titlebar.css" rel="stylesheet" type="text/css"/>
+    <link href="main.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <div id="titlebar" class="component shadow">
+      <div id="titlebar--window-controls">
+        <div id="titlebar--close-window" class="window-control"></div>
+        <div id="titlebar--minimize-window" class="window-control"><div></div></div>
+        <div id="titlebar--maximize-window" class="window-control"><div></div></div>
+      </div>
+      <div id="titlebar--title">Log</div>
+    </div>
+    <div id="logCont"></div>
+    <div id="statusbar" class="component"></div>
+    <script src="startup.js"></script>
+    <script>requireNoCache('./main.js');</script>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../assets/raleway/Raleway-Regular.ttf') format('truetype');
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+  height: 100%;
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+  padding-top: 4.7em;
+}
+
+#pageNav, #settingsNav {
+  position: fixed;
+  left: 0;
+  top: 2.5em;
+}
+
+#pageCont {
+  height: 100%;
+  width: 100%;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-property: opacity;
+  opacity: 0;
+  position: relative;
+}
+
+#pageCont.shown {
+  opacity: 1;
+}
+
+#settingsCont {
+  position: fixed;
+  z-index: -1;
+  left: 0;
+  top: 2.5em;
+  height: calc(100% - 2.5em);
+  width: 100%;
+  opacity: 0;
+  transition-property: opacity, z-index;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out;
+  pointer-events: none;
+  background-color: var(--components-primary-color);
+}
+
+#settingsCont.shown {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 500;
+}
+
+#settingsContCont {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 2.2em;
+  background-color: inherit;
+  transition: 0.2s opacity ease-in-out;
+  opacity: 0;
+}
+
+#settingsContCont.shown {
+  opacity: 1;
+}

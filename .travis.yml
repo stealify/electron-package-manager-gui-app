@@ -1,0 +1,26 @@
+language: node_js
+node_js:
+  - '6'
+
+os:
+  - linux
+  - osx
+dist: trusty
+sudo: false
+group: beta
+
+cache:
+  directories:
+  - node_modules
+  - app/node_modules
+  - $HOME/.electron
+  - $HOME/.cache
+
+addons:
+  apt:
+    packages:
+      - libgnome-keyring-dev
+      - icnsutils
+
+script: npm run build
+after_success: npm run coverage

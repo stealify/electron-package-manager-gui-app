@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Electron",
+    "license": "MIT",
+    "description": "Build cross platform desktop apps with JavaScript, HTML, and CSS",
+    "link": "http://electron.atom.io/",
+    "usedFor": "Base for the app, like the app's runtime"
+  },
+  {
+    "name": "npm",
+    "license": "Artistic-2.0",
+    "description": "A package manager for JavaScript",
+    "link": "https://www.npmjs.com/",
+    "usedFor": "Plugin management"
+  },
+  {
+    "name": "Mustache.js",
+    "license": "MIT",
+    "description": "Minimal templating with {{mustaches}} in JavaScript",
+    "link": "https://mustache.github.io/",
+    "usedFor": "OS menu templates (<code>menu.json</code>)"
+  }
+]

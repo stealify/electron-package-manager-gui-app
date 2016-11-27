@@ -1,0 +1,49 @@
+.component.button {
+  border: 0.1em solid var(--components-secondary-color);
+  transition-property: box-shadow, background-color, border-color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  box-shadow: 0 0 10px var(--components-primary-color-contrast);
+  background-color: var(--components-primary-color);
+  color: var(--components-secondary-color);
+  position: relative;
+  margin: 0.5em;
+  padding: 0.25em;
+  font-size: 1em;
+  font-family: inherit;
+  outline: none !important;
+}
+
+.component.button:hover {
+  box-shadow: 0 0 15px var(--components-primary-color-contrast);
+  background-color: var(--components-secondary-color);
+  color: var(--components-primary-color);
+}
+
+.component.button:active {
+  box-shadow: 0 0 10px var(--components-primary-color-contrast);
+}
+
+/* contrast when it's inside another component */
+.component .component.button {
+  border-color: var(--components-primary-color);
+  background-color: var(--components-secondary-color);
+  color: var(--components-primary-color);
+}
+
+.component .component.button:hover {
+  background-color: var(--components-primary-color);
+  color: var(--components-secondary-color);
+}
+
+/* if it's on a primary bg component (e.g. card body), reset it */
+.component.primary-bg .component.button {
+  border-color: var(--components-secondary-color);
+  background-color: var(--components-primary-color);
+  color: var(--components-secondary-color);
+}
+
+.component.primary-bg .component.button:hover {
+  background-color: var(--components-secondary-color);
+  color: var(--components-primary-color);
+}

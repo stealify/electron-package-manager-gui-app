@@ -1,0 +1,105 @@
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../assets/raleway/Raleway-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Source Code Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../assets/source-code-pro/SourceCodePro-Regular.ttf') format('truetype');
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+  height: 100%;
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+  padding-top: 2.5em;
+}
+
+#header--bottomLine {
+  border: none;
+  height: 0.2em;
+  margin: 0;
+  margin-top: 0.2em;
+  width: 80%;
+  background-color: #000;
+}
+
+#aboutHeader {
+  margin-bottom: 1em;
+}
+
+#aboutHeading {
+  padding-left: 0.5em;
+  font-size: 3em;
+}
+
+#versionHeading {
+  font-size: 1.3em;
+  color: #414141;
+}
+
+.about--subheading {
+  padding-left: 0.5em;
+  font-size: 2em;
+}
+
+#authorsCards {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-flow: row wrap;
+}
+
+#ossCards {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-flow: row wrap;
+}
+
+.author--githubLink, .oss--softwareLink {
+  transition: 0.2s color ease-in-out, 0.2s border-bottom-color ease-in-out;
+  color: #002e7c;
+  border-bottom: 0.1em solid transparent;
+  text-decoration: none !important;
+}
+
+.author--githubLink:hover, .oss--softwareLink:hover {
+  color: #0056e8;
+  border-bottom-color: currentColor;
+}
+
+.oss--usedForHeading {
+  font-size: 1.2em;
+}
+
+.oss--licenseHeading {
+  font-size: 1em;
+  color: #414141;
+  margin-left: 0.3em;
+}
+
+code {
+  background-color: #e0e0e0;
+  color: #0e0e0e;
+  font-size: 0.9em;
+  font-family: 'Source Code Pro', monospace;
+  border-radius: 0.3em;
+  padding: 0.1em 0.3em;
+}

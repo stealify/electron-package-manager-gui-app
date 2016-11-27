@@ -1,0 +1,61 @@
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../assets/raleway/Raleway-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Source Code Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../assets/source-code-pro/SourceCodePro-Regular.ttf') format('truetype');
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+  height: 100%;
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+  padding-top: 2.5em;
+  padding-bottom: 2.5em;
+}
+
+#logCont {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  font-family: 'Source Code Pro', monospace;
+}
+
+#statusbar {
+  position: fixed;
+  bottom: 0;
+  height: 2.5em;
+  background-color: var(--components-secondary-color);
+  width: 100%;
+  z-index: 1000;
+  -webkit-user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px var(--components-primary-color-contrast);
+}
+
+.line {
+  padding: 0.25em;
+  border-top: 0.1em solid var(--components-primary-color-contrast);
+  word-wrap: break-word;
+  word-break: break-all;
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "name": "My Plugins",
+    "index": 0,
+    "path": "../settings-views/my-plugins/subviews/my-plugins/index.html"
+  },
+  {
+    "name": "Install",
+    "index": 1,
+    "path": "../settings-views/my-plugins/subviews/install/index.html"
+  }
+]

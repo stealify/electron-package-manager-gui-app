@@ -1,0 +1,11 @@
+:root {
+  --components-primary-color: #fff;
+  --components-primary-color-darker: #aaa;
+  --components-primary-color-contrast: #000;
+  --components-secondary-color: #1591c6;
+  --components-secondary-color-contrast: #a4a4a4;
+  --components-secondary-color-darker: #0d5b7c;
+  --components-secondary-color-lighter: #19b8fc;
+  --components-helper-color: #414141;
+  --components-helper-color-contrast: #fff;
+}

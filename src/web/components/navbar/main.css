@@ -1,0 +1,34 @@
+.component.navbar {
+  height: 2.2em;
+  background-color: var(--components-secondary-color);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 499;
+  box-shadow: 0 0 15px var(--components-primary-color-contrast);
+}
+
+.component.navbar a {
+  background-color: var(--components-secondary-color);
+  display: block;
+  flex-grow: 1;
+  text-align: center;
+  height: 100%;
+  border-bottom: 0.3em solid transparent;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-property: border-bottom-color, background-color;
+  color: var(--components-primary-color);
+  text-decoration: none !important;
+  padding-top: 0.2em;
+}
+
+.component.navbar a.active {
+  border-bottom-color: #414141;
+}
+
+.component.navbar a:hover {
+  background-color: var(--components-secondary-color-lighter);
+  border-bottom-color: var(--components-primary-color-contrast);
+}

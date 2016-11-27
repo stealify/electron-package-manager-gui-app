@@ -1,0 +1,35 @@
+.component.sidebar {
+  background-color: var(--components-secondary-color);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column wrap;
+}
+
+.component.sidebar a {
+  background-color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  text-align: center;
+  width: 100%;
+  border-right: 0.3em solid transparent;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-property: border-right-color, background-color;
+  color: var(--components-primary-color);
+  text-decoration: none !important;
+}
+
+.component.sidebar a.active {
+  border-right-color: #414141;
+}
+
+.component.sidebar a:hover {
+  background-color: var(--components-secondary-color-lighter);
+  border-right-color: var(--components-primary-color-contrast);
+}

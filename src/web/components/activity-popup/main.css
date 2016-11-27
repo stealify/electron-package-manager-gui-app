@@ -1,0 +1,39 @@
+.component.activity-popup .component.activity-popup--outerCont {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column wrap;
+}
+
+.component.activity-popup .component.activity-popup--bottomCont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.component.activity-popup .component.activity-popup--cont {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.component.activity-popup .component.activity-popup--progressCont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.component.activity-popup .component.activity-popup--progressCont .component.progress-bar {
+  flex-grow: 2;
+}
+
+.component.activity-popup .component.activity-popup--progressCont .component.spinner {
+  flex-grow: 0;
+}
+
+.component.activity-popup .component.activity-popup--header {
+  font-size: 2em;
+}

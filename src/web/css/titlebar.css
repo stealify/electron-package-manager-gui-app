@@ -1,0 +1,154 @@
+#titlebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2.5em;
+  width: 100%;
+  background-color: var(--components-secondary-color);
+  -webkit-app-region: drag;
+  z-index: 1000;
+  transition: 0.6s box-shadow ease-in-out;
+  box-shadow: 0 0 0 var(--components-primary-color-contrast);
+  -webkit-user-select: none;
+}
+
+#titlebar.shadow {
+  box-shadow: 0 0 15px var(--components-primary-color-contrast);
+}
+
+#titlebar.darwin #titlebar--window-controls {
+  display: none;
+}
+
+#titlebar--window-controls {
+  -webkit-app-region: no-drag;
+  position: absolute;
+  top: 0;
+  left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  -webkit-user-select: none;
+}
+
+/* windows does everything the opposite way */
+#titlebar.win32 #titlebar--window-controls {
+  left: auto;
+  right: 10px;
+}
+
+.window-control {
+  margin-right: 0.3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  height: 1em;
+  width: 1em;
+  transition-property: background-color, color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+
+#titlebar--close-window {
+  background-color: #a42b1e;
+  position: relative;
+}
+
+#titlebar--close-window:hover {
+  background-color: #d43727;
+}
+
+#titlebar--close-window::before, #titlebar--close-window::after {
+  content: '';
+  position: absolute;
+  width: 0.5em;
+  height: 0.1em;
+  background-color: transparent;
+  top: 0.5em;
+  bottom: 0.5em;
+  transition: 0.2s background-color ease-in-out;
+}
+
+#titlebar--close-window::before {
+  left: 0.5em;
+  transform: rotate(45deg) translate(-50%, 0.1em);
+}
+
+#titlebar--close-window::after {
+  right: 0.5em;
+  transform: rotate(-45deg) translate(50%, 0.1em);
+}
+
+#titlebar--close-window:hover::before {
+  background-color: #363636;
+}
+
+#titlebar--close-window:hover::after {
+  background-color: #363636;
+}
+
+#titlebar--minimize-window {
+  background-color: #d4d4d4;
+}
+
+#titlebar--minimize-window:hover {
+  background-color: var(--components-primary-color);
+}
+
+#titlebar--minimize-window div {
+  border-top: 2px solid transparent;
+  width: 0.4em;
+  transition: 0.2s border-top-color ease-in-out;
+}
+
+#titlebar--minimize-window:hover div {
+  border-top-color: #363636;
+}
+
+#titlebar--maximize-window {
+  background-color: #d4d4d4;
+}
+
+#titlebar--maximize-window:hover {
+  background-color: var(--components-primary-color);
+}
+
+#titlebar--maximize-window div {
+  border: 1px solid transparent;
+  height: 0.4em;
+  width: 0.4em;
+  transition: 0.2s border-color ease-in-out;
+}
+
+#titlebar--maximize-window:hover div {
+  border-color: #363636;
+}
+
+#titlebar--title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--components-primary-color);
+  text-shadow: 0 0 10px var(--components-primary-color-contrast);
+  font-size: 1.5em;
+}
+
+#floatedCont {
+  float: right;
+}
+
+#settingsButtonCont, #pluginSelectCont, #floatedCont {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-app-region: no-drag;
+  -webkit-user-select: none;
+}
+
+#titlebar.win32 #floatedCont {
+  float: left;
+}

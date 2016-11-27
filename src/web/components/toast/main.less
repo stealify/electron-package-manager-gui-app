@@ -1,0 +1,79 @@
+.component.toast {
+  box-shadow: 0 0 15px #000;
+  background-color: var(--components-helper-color);
+  color: var(--components-helper-color-contrast);
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  transition-duration: 0.4s;
+  transition-timing-function: ease-in-out;
+  transition-property: right, bottom, transform, opacity;
+  opacity: 0;
+  transform: translate(0, 0);
+  display: flex;
+  flex-flow: column nowrap;
+  z-index: 900;
+  pointer-events: none;
+  min-width: 10vw;
+
+  &.error .component.toast--header {
+    background-color: #a11;
+  }
+
+  &.success .component.toast--header {
+    background-color: #1a1;
+  }
+
+  &.shown {
+    transform: translate(-10px, -10px);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .component.toast--header {
+    background-color: var(--components-secondary-color);
+    width: 100%;
+    padding: 0.2em 1.2em;
+    font-size: 1.3em;
+    margin-bottom: 0.2em;
+  }
+
+  .component.toast--body {
+    flex: 1;
+    padding: 0.2em 1em;
+  }
+
+  .component.toast--action-container {
+    width: 100%;
+    padding: 0.2em 1em;
+    margin-bottom: 0.2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row nowrap;
+
+    .component.toast--action {
+      flex: 1;
+      cursor: pointer;
+      transition: 0.2s color ease-in-out;
+      color: var(--components-secondary-color);
+      text-align: center;
+
+      &:first-child {
+        text-align: left;
+      }
+
+      &:last-child {
+        text-align: right;
+      }
+
+      &:hover {
+        color: var(--components-secondary-color-lighter);
+      }
+
+      &:active {
+        color: var(--components-secondary-color-darker);
+      }
+    }
+  }
+}

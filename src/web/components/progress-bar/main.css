@@ -1,0 +1,58 @@
+@keyframes changeBackground {
+  0% {
+    background-color: #4286f4;
+  }
+  10% {
+    background-color: #42f4f4;
+  }
+  20% {
+    background-color: #42f474;
+  }
+  30% {
+    background-color: #a0f442;
+  }
+  40% {
+    background-color: #f4ec42;
+  }
+  50% {
+    background-color: #f4a242;
+  }
+  60% {
+    background-color: #f44242;
+  }
+  70% {
+    background-color: #f442c7;
+  }
+  80% {
+    background-color: #b542f4;
+  }
+  90% {
+    background-color: #7542f4;
+  }
+  100% {
+    background-color: #4286f4;
+  }
+}
+
+.component.progress-bar {
+  border-radius: 0.3em;
+  height: 1em;
+  min-width: 5em;
+  background-color: var(--components-secondary-color-contrast);
+  overflow: hidden;
+  margin: 0.5em;
+}
+
+.component.progress-bar--innerProgress {
+  transition: 0.7s width ease-in-out, 0.2s background-color ease-in-out;
+  width: 0%;
+  background-color: var(--components-secondary-color);
+  height: 100%;
+  border-radius: inherit;
+  animation: 20s ease-in-out infinite changeBackground;
+}
+
+.component.progress-bar.error .component.progress-bar--innerProgress {
+  background-color: #f44242;
+  animation: none;
+}

@@ -1,0 +1,14 @@
+.component {
+  -webkit-user-select: none;
+}
+
+.component.fadable {
+  opacity: 0;
+  transition: 0.2s opacity ease-in-out;
+  pointer-events: none;
+}
+
+.component.fadable.shown {
+  opacity: 1;
+  pointer-events: auto;
+}

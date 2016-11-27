@@ -1,0 +1,22 @@
+{
+  "authors": "facekapow <https://github.com/facekapow>",
+  "definitionFilename": "index.d.ts",
+  "libraryDependencies": [
+    "@types/node",
+    "@types/es6-promise"
+  ],
+  "libraryMajorVersion": "1",
+  "libraryMinorVersion": "5",
+  "libraryName": "then-utils",
+  "typingsPackageName": "then-utils",
+  "projectName": "then-utils",
+  "kind": "DeclareModule",
+  "globals": [],
+  "declaredModules": [
+    "then-utils"
+  ],
+  "files": [
+    "index.d.ts"
+  ],
+  "contentHash": "feee267b654d11a1b68f9cdd079452e370c336970b33bb9099090d02ec3ade39"
+}

@@ -1,0 +1,8 @@
+{
+  "appTitle": "pipam",
+  "titleBarName": "Pipam",
+  "testing": {
+    "appTitle": "pipam-testing",
+    "titleBarName": "PipamTesting"
+  }
+}

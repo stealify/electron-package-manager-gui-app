@@ -1,0 +1,19 @@
+{
+  "__macOnly": {
+    "{{titleBarName}}": {
+      "__default": "app"
+    }
+  },
+  "Edit": {
+    "__default": "edit"
+  },
+  "View": {
+    "__default": "view"
+  },
+  "Window": {
+    "__default": "window"
+  },
+  "Help": {
+    "__default": "help"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "getos-dts",
+  "version": "1.0.0",
+  "description": "TypeScript definition for getos",
+  "keywords": [
+    "getos",
+    "dts"
+  ],
+  "author": "facekapow",
+  "license": "MIT",
+  "typings": "index.d.ts"
+}

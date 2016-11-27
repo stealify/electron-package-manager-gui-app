@@ -1,0 +1,33 @@
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Pipam</title>
+    <link href="theme.css" rel="stylesheet" type="text/css"/>
+    <link href="components/include.css" rel="stylesheet" type="text/css"/>
+    <link href="css/titlebar.css" rel="stylesheet" type="text/css"/>
+    <link href="css/firstTime.css" rel="stylesheet" type="text/css"/>
+    <link href="css/index.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <div id="titlebar" class="component">
+      <div id="titlebar--window-controls">
+        <div id="titlebar--close-window" class="window-control"></div>
+        <div id="titlebar--minimize-window" class="window-control"><div></div></div>
+        <div id="titlebar--maximize-window" class="window-control"><div></div></div>
+      </div>
+      <div id="floatedCont">
+        <div id="menuButtonCont"></div>
+        <div id="pluginSelectCont"></div>
+        <div id="settingsButtonCont"></div>
+      </div>
+    </div>
+    <div id="pageCont"></div>
+    <div id="settingsCont">
+      <div id="settingsContCont"></div>
+    </div>
+    <script src="startup.js"></script>
+    <script>requireNoCache('./js');</script>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "pipam-dummy-plugin",
+  "description": "A dummy plugin (actived when there's absolutely no other plugins available)",
+  "version": "1.0.0",
+  "keywords": ["pipam"],
+  "main": "index.js",
+  "pipam": {
+    "displayName": "None"
+  }
+}

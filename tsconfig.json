@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "noImplicitAny": false,
+    "inlineSourceMap": true,
+    "lib": [
+      "dom",
+      "es5",
+      "es2015",
+      "es2016"
+    ],
+    "newLine": "LF",
+    "strictNullChecks": false
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "then-utils-dts",
+  "version": "1.0.0",
+  "description": "TypeScript definition for then-utils",
+  "keywords": [
+    "then-utils",
+    "dts"
+  ],
+  "author": "facekapow",
+  "license": "MIT",
+  "typings": "index.d.ts",
+  "dependencies": {
+    "@types/es6-promise": "latest",
+    "@types/node": "latest"
+  }
+}

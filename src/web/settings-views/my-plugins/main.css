@@ -1,0 +1,21 @@
+#settingsContCont {
+  display: flex;
+}
+
+#settings--plugins-sidebar {
+  box-shadow: 0 0 10px var(--components-primary-color-contrast);
+  z-index: 300;
+}
+
+#settings--pluginsCont {
+  transition: 0.2s opacity ease-in-out;
+  opacity: 0;
+  flex-grow: 1;
+  padding-left: 10px;
+  padding-top: 10px;
+  position: relative;
+}
+
+#settings--pluginsCont.shown {
+  opacity: 1;
+}

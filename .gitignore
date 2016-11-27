@@ -1,0 +1,7 @@
+**/node_modules/
+dist/
+**/*.DS_Store
+app/
+coverage
+.nyc_output
+NOTES.md
