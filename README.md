@@ -2,13 +2,12 @@
   <a href="https://github.com/pipam/pipam"><img src="assets/banner.png" alt="Pipam" width="480" height="270"/></a><br>
 </h1>
 
-| Service                         | Badge                                                                                                          |
-|---------------------------------|----------------------------------------------------------------------------------------------------------------|
-| Travis (macOS and Linux Builds) | [![Travis](https://img.shields.io/travis/pipam/pipam.svg)](https://travis-ci.org/pipam/pipam)                  |
+| Service                         | Badge                                                                                                                  |
+|---------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| Travis (macOS and Linux Builds) | [![Travis](https://img.shields.io/travis/pipam/pipam.svg)](https://travis-ci.org/pipam/pipam)                          |
 | AppVeyor (Windows Builds)       | [![AppVeyor](https://img.shields.io/appveyor/ci/facekapow/pipam.svg)](https://ci.appveyor.com/project/facekapow/pipam) |
-| Coveralls.io (Code Coverage)    | [![Coveralls](https://img.shields.io/coveralls/pipam/pipam.svg)](https://coveralls.io/github/pipam/pipam)      |
-
-A package manager manager.
+| Coveralls.io (Code Coverage)    | [![Coveralls](https://img.shields.io/coveralls/pipam/pipam.svg)](https://coveralls.io/github/pipam/pipam)              |
+| Gitter (Support/Chat Room)      | [![Gitter](https://img.shields.io/gitter/room/pipam/pipam.svg)](https://gitter.im/pipam/pipam)                         |
 
 Pipam is little app that helps you manage your packages across different package managers. E.g. manage packages from apt-get, Homebrew, and more (hopefully npm, bundler, pip, etc. in the future).
 
