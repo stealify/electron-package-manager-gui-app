@@ -37,7 +37,7 @@ function writeInstallType(pkgPath: string, installType: InstallType) {
     const pkgJson = JSON.parse(jsonStr);
     pkgJson.pipam = pkgJson.pipam || {};
     pkgJson.pipam._installType = installType;
-    return writeFile(`${pkgPath}/package.json`, JSON.stringify(pkgJson, null, 2));
+    return writeFile(joinPath(pkgPath, 'package.json'), JSON.stringify(pkgJson, null, 2));
   });
 }
 
@@ -49,10 +49,10 @@ class PluginsManager {
     this.activePlugin = new ActivePluginManager(this);
   }
   touchDir(): Promise<void> {
-    return mkdirp(`${app.getPath('userData')}/plugins`);
+    return mkdirp(joinPath(app.getPath('userData'), 'plugins'));
   }
   isAvailable(plugin: string): Promise<boolean> {
-    return readdir(`${app.getPath('userData')}/plugins`).then(files => {
+    return readdir(joinPath(app.getPath('userData'), 'plugins')).then(files => {
       return asyncFor(files, (i, file) => {
         if (file === plugin) {
           return Promise.reject(undefined);
@@ -65,7 +65,7 @@ class PluginsManager {
     return (() => {
       if (this.active && this.active.module) return this.activePlugin.cleanup();
       return Promise.resolve();
-    })().then(() => readFile(`${app.getPath('userData')}/plugins/${plugin}/package.json`, 'utf8')).then((cont: string) => {
+    })().then(() => readFile(joinPath(app.getPath('userData'), 'plugins', plugin, 'package.json'), 'utf8')).then((cont: string) => {
       const parsed = JSON.parse(cont);
       if (typeof parsed.pipam !== 'object') return Promise.reject('The package is not a pipam plugin');
       this.active = {
@@ -81,7 +81,7 @@ class PluginsManager {
     return (() => {
       if (this.active && this.active.module) return this.activePlugin.cleanup();
       return Promise.resolve();
-    })().then(() => readFile(`${__dirname}/../dummy-plugin/package.json`, 'utf8')).then((cont: string) => {
+    })().then(() => readFile(joinPath(__dirname, '..', 'dummy-plugin', 'package.json'), 'utf8')).then((cont: string) => {
       const parsed = JSON.parse(cont);
       if (typeof parsed.pipam !== 'object') return Promise.reject('The package is not a pipam plugin');
       this.active = {
@@ -95,13 +95,13 @@ class PluginsManager {
   }
   getList(): Promise<PluginInfoObject[]> {
     const res = [];
-    return readdir(`${app.getPath('userData')}/plugins`).then((files: string[]) => {
+    return readdir(joinPath(app.getPath('userData'), 'plugins')).then((files: string[]) => {
       return asyncFor(files, (i, file) => {
-        return callWithPromiseOrCallback(stat, `${app.getPath('userData')}/plugins/${file}`).then(stats => {
+        return callWithPromiseOrCallback(stat, joinPath(app.getPath('userData'), 'plugins', file)).then(stats => {
           if (!stats.isDirectory()) {
             return Promise.resolve();
           }
-          return readFile(`${app.getPath('userData')}/plugins/${file}/package.json`, 'utf8').then((cont: string) => {
+          return readFile(joinPath(app.getPath('userData'), 'plugins', file, 'package.json'), 'utf8').then((cont: string) => {
             const parsed = JSON.parse(cont);
             if (typeof parsed.pipam !== 'object') return;
             res.push({
@@ -136,8 +136,8 @@ class PluginsManager {
   }
   install(plugin: string, fromUpdate?: boolean): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      const child = fork(`${__dirname}/../../node_modules/npm/bin/npm-cli.js`, ['install', '--loglevel', 'silly', `${plugin}@latest`], {
-        cwd: `${app.getPath('userData')}/plugins`,
+      const child = fork(joinPath(__dirname, '..', '..', 'node_modules', 'npm', 'bin', 'npm-cli.js'), ['install', '--loglevel', 'silly', `${plugin}@latest`], {
+        cwd: joinPath(app.getPath('userData'), 'plugins'),
         silent: true,
         env: {
           npm_config_target: (<object>process.versions).electron,
@@ -146,7 +146,7 @@ class PluginsManager {
           npm_config_disturl: 'https://atom.io/download/atom-shell',
           npm_config_runtime: 'electron',
           npm_config_build_from_source: true,
-          HOME: `${homedir()}/.electron-gyp`
+          HOME: joinPath(homedir(), '.electron-gyp')
         }
       });
 
@@ -179,10 +179,10 @@ class PluginsManager {
       child.once('error', reject);
       child.once('exit', (code, signal) => {
         if (code !== 0) return reject(new Error('The process exited with a non-zero return code'));
-        writeInstallType(`${app.getPath('userData')}/plugins/node_modules/${plugin}`, InstallType.npm).then(() => {
-          return mv(`${app.getPath('userData')}/plugins/node_modules/${plugin}`, `${app.getPath('userData')}/plugins/${plugin}`);
+        writeInstallType(joinPath(app.getPath('userData'), 'plugins', 'node_modules', plugin), InstallType.npm).then(() => {
+          return mv(joinPath(app.getPath('userData'), 'plugins', 'node_modules', plugin), joinPath(app.getPath('userData'), 'plugins', plugin));
         }).then(() => {
-          return mv(`${app.getPath('userData')}/plugins/node_modules`, `${app.getPath('userData')}/plugins/${plugin}/node_modules`);
+          return mv(joinPath(app.getPath('userData'), 'plugins', 'node_modules'), joinPath(app.getPath('userData'), 'plugins', plugin, 'node_modules'));
         }).then(() => resolve()).catch(reject);
       });
     });
@@ -204,7 +204,7 @@ class PluginsManager {
       myRef.push('Decompressing ppz...');
 
       decompressPpz(pathname, joinPath(app.getPath('userData'), 'plugins')).then(plugin => {
-        return writeInstallType(`${app.getPath('userData')}/plugins/${plugin}`, InstallType.Archive);
+        return writeInstallType(joinPath(app.getPath('userData'), 'plugins', plugin), InstallType.Archive);
       }).then(() => {
         myRef.push('Done!');
         myRef.push(null);
@@ -217,7 +217,7 @@ class PluginsManager {
     return Promise.resolve(streams.install);
   }
   update(plugin: string): Promise<void> {
-    return rmrf(`${app.getPath('userData')}/plugins/${plugin}`).then(() => {
+    return rmrf(joinPath(app.getPath('userData'), 'plugins', plugin)).then(() => {
       return this.install(plugin, true);
     });
   }
@@ -226,13 +226,13 @@ class PluginsManager {
     return Promise.resolve(streams.update);
   }
   uninstall(plugin: string): Promise<void> {
-    return rmrf(`${app.getPath('userData')}/plugins/${plugin}`);
+    return rmrf(joinPath(app.getPath('userData'), 'plugins', plugin));
   }
   uninstallLogs(): Promise<LogStream> {
     return Promise.reject(new Error('Nope.'));
   }
   info(plugin: string): Promise<object> {
-    return readFile(`${app.getPath('userData')}/plugins/${plugin}/package.json`, 'utf8').then((cont: string) => {
+    return readFile(joinPath(app.getPath('userData'), 'plugins', plugin, 'package.json'), 'utf8').then((cont: string) => {
       const parsed = JSON.parse(cont);
       if (typeof parsed.pipam !== 'object') return Promise.reject('The package is not a pipam plugin');
       return Promise.resolve({

@@ -1,0 +1,26 @@
+version: 1.0.{build}
+environment:
+  GH_TOKEN:
+    secure: 7/i+8/wTPkg6/1byrDvsouy/w9VwKOr3wSJEaTaDj0xUjrKCfgM/Obp5XtHKnSYa
+install:
+  - ps: Install-Product node 'Stable'
+  - cmd: npm install
+build_script:
+  - ps: $env:app_version = (Get-Content -Raw -Path package.json | ConvertFrom-Json).version
+  - cmd: npm run build
+test_script:
+  - cmd: npm test
+before_deploy:
+  - cmd: npm run dist
+  - ps: Push-AppveyorArtifact dist/out/Pipam-Setup-Windows-x64-$((Get-Content -Raw -Path package.json | ConvertFrom-Json).version).exe
+deploy:
+  - release: $(APPVEYOR_REPO_TAG_NAME)
+    description: ''
+    provider: GitHub
+    auth_token:
+      secure: 7/i+8/wTPkg6/1byrDvsouy/w9VwKOr3wSJEaTaDj0xUjrKCfgM/Obp5XtHKnSYa
+    artifact: /.*/
+    draft: true
+    prerelease: false
+    on:
+      appveyor_repo_tag: true

@@ -66,6 +66,7 @@ module.exports = {
     });
   },
   error(msg) {
+    process.exitCode = 1;
     return Promise.resolve(console.log(`<${chalk.red('error')} class="${chalk.red(section)}" name="${chalk.red(escapeQuotes(subsection))}"${(msg) ? `> ${msg} </${chalk.red('error')}` : '/'}>`));
   },
   warn(msg) {

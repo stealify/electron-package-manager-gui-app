@@ -2,7 +2,7 @@
 
 'use strict';
 
-const { spawn, mv, mkdirp, asyncFor, cpr } = require('then-utils');
+const { spawn, mv, mkdirp, asyncFor } = require('then-utils');
 const { join: joinPath } = require('path');
 const { version: ver } = require('../package.json');
 const logger = require('./lib/logger');
@@ -32,7 +32,7 @@ process.on('SIGINT', () => process.exit());
 logger.section = 'prep';
 logger.subsection = 'generating platform and target list';
 
-const platforms = [
+const availablePlatforms = [
   {
     platform: 'macOS',
     arch: 'x64',
@@ -58,15 +58,36 @@ const platforms = [
     platform: 'Linux',
     arch: 'amd64',
     args: '--linux deb --linux AppImage --x64',
-    buildName: joinPath('dist', `pipam-${ver}-amd64.deb`),
+    buildName: joinPath('dist', `pipam_${ver}_amd64.deb`),
     outName: joinPath('dist', 'out', `pipam-linux-amd64-${ver}.deb`),
     extraSteps: [
       () => {
-        return mv(joinPath('..', 'dist', `pipam-${ver}-x86_64.AppImage`), joinPath('..', 'dist', 'out', `pipam-linux-amd64-${ver}.AppImage`));
+        return mv(joinPath(__dirname, '..', 'dist', `pipam-${ver}-x86_64.AppImage`), joinPath(__dirname, '..', 'dist', 'out', `pipam-linux-x86_64-${ver}.AppImage`));
       }
     ]
   }
 ];
+
+let platforms = [];
+
+if (process.env.GH_TOKEN) {
+  switch (process.platform) {
+    case 'win32':
+      platforms.push(availablePlatforms[1]);
+      break;
+    case 'darwin':
+      platforms.push(availablePlatforms[0]);
+      break;
+    case 'linux':
+      platforms.push(availablePlatforms[3]);
+      break;
+    default:
+      throw new Error('unsupported build platform');
+      break;
+  }
+} else {
+  platforms = availablePlatforms;
+}
 
 logger.info(`build platforms and targets are ${inspect(platforms, {
   depth: null,
@@ -80,15 +101,13 @@ logger.debug(`going to increment progress bar after every step for each platform
 function buildFor(platform) {
   logger.section = `build:${platform.platform}:${platform.arch}`;
   logger.subsection = 'executing build command';
-  return exec(`build ${platform.args}`, {
+  return exec(`${joinPath(__dirname, '..', 'node_modules', '.bin', (process.platform === 'win32') ? 'build.cmd' : 'build')} ${platform.args} --publish never`, {
     cwd: joinPath(__dirname, '..')
   }).then(() => {
-    if (process.env.GH_TOKEN) return Promise.resolve();
-    logger.subsection = 'copying build artifacts';
+    logger.subsection = 'moving build artifacts';
     logger.progress += increment;
-    return cpr(joinPath(__dirname, '..', platform.buildName), joinPath(__dirname, '..', platform.outName));
+    return mv(joinPath(__dirname, '..', platform.buildName), joinPath(__dirname, '..', platform.outName));
   }).then(() => {
-    if (process.env.GH_TOKEN) return Promise.resolve();
     logger.subsection = 'performing any extra build steps';
     if (platform.extraSteps) {
       const incrementEachStep = increment / platform.extraSteps.length;

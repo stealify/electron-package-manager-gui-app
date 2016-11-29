@@ -1,26 +1,52 @@
 language: node_js
 node_js:
-  - '6'
+  - node
 
 os:
   - linux
   - osx
 dist: trusty
-sudo: false
+sudo: required
 group: beta
 
 cache:
   directories:
   - node_modules
   - app/node_modules
-  - $HOME/.electron
-  - $HOME/.cache
+  - "$HOME/.electron"
+  - "$HOME/.cache"
 
 addons:
   apt:
     packages:
-      - libgnome-keyring-dev
-      - icnsutils
+    - libgnome-keyring-dev
+    - icnsutils
 
-script: npm run build
-after_success: npm run coverage
+script:
+  - npm run build
+  - npm test
+after_success:
+  - npm run coverage
+
+before_deploy: npm run dist
+deploy:
+  - provider: releases
+    api_key:
+      secure: X8JPH7Bw0SGBhYvuHaynlgtDQAW4UX3HZ6eSgLmsEL7irAF39o01BQm6NI37hGhN9QN0XxJq27J0+N87KesfKVywXHwfP0ptTMCPBQZMEnG+0TA0p5AFHb2gZ3chdC7choy5K7T2vjofW7KF3Exw51I7wOmwHAtx7I2NZN6+Pswx8tkMwtcpVbmN4vZ8u2MQ/UdSwjrbmztaJJte4OHBRY3oFP4rhg26DHM+R1qfvm+ZzsPR+SSb4NVTM71y03yArQoFC7PmuwFO0KzZDJMwq0l7CGfoopMsca+xhrz6HEd5DS4A7dkGeXkx5zZptBbqa0yKROwXlHGaCTDeDwmbGcYpOgXzlajIhPfMu4tWrAl/0pmGfL1sEx1+dK9nPQPqKaU/wyvUQ0o+xrtzyjCPyfJ0Vx9qbj64PpfOb2r6SEUvyX3JaQ92ABFWE0MlwspiEQXElwoXWd1Ea3CoF0FiD/TE6VkdXf6JrZpwr0fniYdC8Z3hAicQi0vV7cRE47QGArLQKy0bzGZFwJzc49oxzjQ/ZEtUFrtc5zyVs9XHshX90zcx7I9BO+P1ZWcQedmsq+oilW+cp5nGA7izDmIvPaxIAFZLiUOq431OPHs+Ij09MSOuBoq/TidM5L8nVi22YVESaXu1ZXBnR6Lzt6oFJ1hnlQKSofIpynBBXamHFIs=
+    skip_cleanup: true
+    file:
+      - dist/out/pipam-linux-x86_64-1.0.0.AppImage
+      - dist/out/pipam-linux-amd64-1.0.0.deb
+    draft: true
+    on:
+      tags: true
+      condition: $TRAVIS_OS_NAME = linux
+  - provider: releases
+    api_key:
+      secure: X8JPH7Bw0SGBhYvuHaynlgtDQAW4UX3HZ6eSgLmsEL7irAF39o01BQm6NI37hGhN9QN0XxJq27J0+N87KesfKVywXHwfP0ptTMCPBQZMEnG+0TA0p5AFHb2gZ3chdC7choy5K7T2vjofW7KF3Exw51I7wOmwHAtx7I2NZN6+Pswx8tkMwtcpVbmN4vZ8u2MQ/UdSwjrbmztaJJte4OHBRY3oFP4rhg26DHM+R1qfvm+ZzsPR+SSb4NVTM71y03yArQoFC7PmuwFO0KzZDJMwq0l7CGfoopMsca+xhrz6HEd5DS4A7dkGeXkx5zZptBbqa0yKROwXlHGaCTDeDwmbGcYpOgXzlajIhPfMu4tWrAl/0pmGfL1sEx1+dK9nPQPqKaU/wyvUQ0o+xrtzyjCPyfJ0Vx9qbj64PpfOb2r6SEUvyX3JaQ92ABFWE0MlwspiEQXElwoXWd1Ea3CoF0FiD/TE6VkdXf6JrZpwr0fniYdC8Z3hAicQi0vV7cRE47QGArLQKy0bzGZFwJzc49oxzjQ/ZEtUFrtc5zyVs9XHshX90zcx7I9BO+P1ZWcQedmsq+oilW+cp5nGA7izDmIvPaxIAFZLiUOq431OPHs+Ij09MSOuBoq/TidM5L8nVi22YVESaXu1ZXBnR6Lzt6oFJ1hnlQKSofIpynBBXamHFIs=
+    skip_cleanup: true
+    file: dist/out/Pipam-macOS-1.0.0.dmg
+    draft: true
+    on:
+      tags: true
+      condition: $TRAVIS_OS_NAME = osx

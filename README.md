@@ -5,7 +5,7 @@
 | Service                         | Badge                                                                                                          |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------|
 | Travis (macOS and Linux Builds) | [![Travis](https://img.shields.io/travis/pipam/pipam.svg)](https://travis-ci.org/pipam/pipam)                  |
-| AppVeyor (Windows Builds)       | [![AppVeyor](https://img.shields.io/appveyor/ci/pipam/pipam.svg)](https://ci.appveyor.com/project/pipam/pipam) |
+| AppVeyor (Windows Builds)       | [![AppVeyor](https://img.shields.io/appveyor/ci/facekapow/pipam.svg)](https://ci.appveyor.com/project/facekapow/pipam) |
 | Coveralls.io (Code Coverage)    | [![Coveralls](https://img.shields.io/coveralls/pipam/pipam.svg)](https://coveralls.io/github/pipam/pipam)      |
 
 A package manager manager.
