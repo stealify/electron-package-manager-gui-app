@@ -28,15 +28,17 @@ script:
 after_success:
   - npm run coverage
 
-before_deploy: npm run dist
+before_deploy:
+ - npm run dist
+ - "export PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g')"
 deploy:
   - provider: releases
     api_key:
       secure: X8JPH7Bw0SGBhYvuHaynlgtDQAW4UX3HZ6eSgLmsEL7irAF39o01BQm6NI37hGhN9QN0XxJq27J0+N87KesfKVywXHwfP0ptTMCPBQZMEnG+0TA0p5AFHb2gZ3chdC7choy5K7T2vjofW7KF3Exw51I7wOmwHAtx7I2NZN6+Pswx8tkMwtcpVbmN4vZ8u2MQ/UdSwjrbmztaJJte4OHBRY3oFP4rhg26DHM+R1qfvm+ZzsPR+SSb4NVTM71y03yArQoFC7PmuwFO0KzZDJMwq0l7CGfoopMsca+xhrz6HEd5DS4A7dkGeXkx5zZptBbqa0yKROwXlHGaCTDeDwmbGcYpOgXzlajIhPfMu4tWrAl/0pmGfL1sEx1+dK9nPQPqKaU/wyvUQ0o+xrtzyjCPyfJ0Vx9qbj64PpfOb2r6SEUvyX3JaQ92ABFWE0MlwspiEQXElwoXWd1Ea3CoF0FiD/TE6VkdXf6JrZpwr0fniYdC8Z3hAicQi0vV7cRE47QGArLQKy0bzGZFwJzc49oxzjQ/ZEtUFrtc5zyVs9XHshX90zcx7I9BO+P1ZWcQedmsq+oilW+cp5nGA7izDmIvPaxIAFZLiUOq431OPHs+Ij09MSOuBoq/TidM5L8nVi22YVESaXu1ZXBnR6Lzt6oFJ1hnlQKSofIpynBBXamHFIs=
     skip_cleanup: true
     file:
-      - dist/out/pipam-linux-x86_64-1.0.0.AppImage
-      - dist/out/pipam-linux-amd64-1.0.0.deb
+      - dist/out/pipam-linux-x86_64-${PACKAGE_VERSION}.AppImage
+      - dist/out/pipam-linux-amd64-${PACKAGE_VERSION}.deb
     draft: true
     target_commitish: ${TRAVIS_TAG}
     on:
@@ -46,7 +48,7 @@ deploy:
     api_key:
       secure: X8JPH7Bw0SGBhYvuHaynlgtDQAW4UX3HZ6eSgLmsEL7irAF39o01BQm6NI37hGhN9QN0XxJq27J0+N87KesfKVywXHwfP0ptTMCPBQZMEnG+0TA0p5AFHb2gZ3chdC7choy5K7T2vjofW7KF3Exw51I7wOmwHAtx7I2NZN6+Pswx8tkMwtcpVbmN4vZ8u2MQ/UdSwjrbmztaJJte4OHBRY3oFP4rhg26DHM+R1qfvm+ZzsPR+SSb4NVTM71y03yArQoFC7PmuwFO0KzZDJMwq0l7CGfoopMsca+xhrz6HEd5DS4A7dkGeXkx5zZptBbqa0yKROwXlHGaCTDeDwmbGcYpOgXzlajIhPfMu4tWrAl/0pmGfL1sEx1+dK9nPQPqKaU/wyvUQ0o+xrtzyjCPyfJ0Vx9qbj64PpfOb2r6SEUvyX3JaQ92ABFWE0MlwspiEQXElwoXWd1Ea3CoF0FiD/TE6VkdXf6JrZpwr0fniYdC8Z3hAicQi0vV7cRE47QGArLQKy0bzGZFwJzc49oxzjQ/ZEtUFrtc5zyVs9XHshX90zcx7I9BO+P1ZWcQedmsq+oilW+cp5nGA7izDmIvPaxIAFZLiUOq431OPHs+Ij09MSOuBoq/TidM5L8nVi22YVESaXu1ZXBnR6Lzt6oFJ1hnlQKSofIpynBBXamHFIs=
     skip_cleanup: true
-    file: dist/out/Pipam-macOS-1.0.0.dmg
+    file: dist/out/Pipam-macOS-${PACKAGE_VERSION}.dmg
     draft: true
     target_commitish: ${TRAVIS_TAG}
     on:
