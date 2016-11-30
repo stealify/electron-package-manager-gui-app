@@ -17,7 +17,7 @@ import ToastComponent, { ToastType } from './components/toast';
 
 import toastManager from './managers/toasts';
 
-import { version as appVersion } from '../../package.json';
+import { version as appVersion } from '../package.json';
 
 //
 // constants that could change
