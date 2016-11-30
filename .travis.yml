@@ -40,7 +40,6 @@ deploy:
       - dist/out/pipam-linux-x86_64-${PACKAGE_VERSION}.AppImage
       - dist/out/pipam-linux-amd64-${PACKAGE_VERSION}.deb
     draft: true
-    target_commitish: ${TRAVIS_TAG}
     on:
       tags: true
       condition: $TRAVIS_OS_NAME = linux
@@ -50,7 +49,6 @@ deploy:
     skip_cleanup: true
     file: dist/out/Pipam-macOS-${PACKAGE_VERSION}.dmg
     draft: true
-    target_commitish: ${TRAVIS_TAG}
     on:
       tags: true
       condition: $TRAVIS_OS_NAME = osx
