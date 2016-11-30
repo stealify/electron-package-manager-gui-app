@@ -77,13 +77,14 @@ const defaultPlugins: {
       return null;
     });
   },
-  // not available yet
-  /*win32() {
-    return callWithPromiseOrCallback(commandExists, 'choco').then(exists => {
+  win32() {
+    // not available yet
+    return null;
+    /*return callWithPromiseOrCallback(commandExists, 'choco').then(exists => {
       if (exists) return 'chocolatey';
       return null;
-    });
-  },*/
+    });*/
+  },
   linux() {
     return callWithPromiseOrCallback(getos).then(os => {
       switch (os.dist.split(' ')[0]) {
