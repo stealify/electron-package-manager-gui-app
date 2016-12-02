@@ -22,6 +22,7 @@ import { join as joinPath } from 'path';
 import { ActivePlugin, InstallType, PluginInfoObject } from './pluginDefs';
 import { gt } from 'semver';
 import { app } from 'electron';
+import fetch from 'node-fetch';
 
 const streams = {
   install: null,
@@ -31,6 +32,8 @@ const streams = {
 class LogStream extends ReadableStream {
   _read() {}
 }
+
+class OkReject {};
 
 function writeInstallType(pkgPath: string, installType: InstallType) {
   return readFile(`${pkgPath}/package.json`, 'utf8').then((jsonStr: string) => {
@@ -104,14 +107,34 @@ class PluginsManager {
           return readFile(joinPath(app.getPath('userData'), 'plugins', file, 'package.json'), 'utf8').then((cont: string) => {
             const parsed = JSON.parse(cont);
             if (typeof parsed.pipam !== 'object') return;
-            res.push({
-              displayName: parsed.pipam.displayName,
-              description: parsed.description,
-              name: parsed.name,
-              version: parsed.version,
-              active: (this.active && this.active.name === parsed.name) ? true : false,
-              uninstallable: true,
-              installType: (parsed.pipam._installType || parsed.pipam._installType === 0) ? parsed.pipam._installType : InstallType.Archive
+
+            const installType: InstallType = (parsed.pipam._installType || parsed.pipam._installType === 0) ? parsed.pipam._installType : InstallType.Archive;
+            let upToDate = true;
+
+            let prom = Promise.resolve();
+
+            if (installType === InstallType.npm) {
+              prom = fetch(`https://registry.npmjs.org/${parsed.name}/latest`).then(res => {
+                if (!res.ok) return Promise.reject(new Error('Couldn\'t get that package, sorry...'));
+                return res.json();
+              }).then(json => {
+                if (gt(json.version, parsed.version)) {
+                  upToDate = false;
+                }
+              });
+            }
+            
+            return prom.then(() => {
+              res.push({
+                displayName: parsed.pipam.displayName,
+                description: parsed.description,
+                name: parsed.name,
+                version: parsed.version,
+                active: (this.active && this.active.name === parsed.name) ? true : false,
+                uninstallable: true,
+                installType,
+                upToDate
+              });
             });
           });
         });
@@ -126,7 +149,8 @@ class PluginsManager {
             version: '1.0.0',
             active: true,
             uninstallable: false,
-            installType: InstallType.Archive
+            installType: InstallType.Archive,
+            upToDate: true
           }
         ];
       } else {
@@ -243,19 +267,22 @@ class PluginsManager {
       });
     });
   }
-  checkForUpdates(): Promise<string[]> {
-    const res: string[] = [];
+  checkForUpdates(): Promise<boolean> {
+    let res: boolean = false;
     return this.getList().then((list: PluginInfoObject[]) => {
       return asyncFor(list, (i, item) => {
         if (item.installType !== InstallType.npm) return Promise.resolve();
-        return exec(`npm show ${item.name} version`).then(({ stdout }) => {
-          const latestVer = String(stdout).trim();
-          if (gt(latestVer, item.version)) {
-            res.push(item.name);
-          }
-        });
+        if (item.upToDate) return Promise.resolve();
+        return Promise.reject(new OkReject());
+      }).catch(err => {
+        if (err instanceof OkReject) {
+          res = true;
+          return Promise.resolve();
+        }
       });
-    }).then(() => res);
+    }).then(() => {
+      return res;
+    });
   }
 }
 

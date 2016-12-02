@@ -130,12 +130,12 @@ test.serial('plugins getting install logs without a stream throws', async t => a
 test.serial('plugins getting update logs without a stream throws', async t => await t.throws(pluginsManager.updateLogs(), null));
 test.serial('plugins getting uninstall logs without a stream throws', async t => await t.throws(pluginsManager.uninstallLogs(), null));
 
-test.serial('plugins no updates are available for no plugins installed', async t => await t.is((await pluginsManager.checkForUpdates()).length, 0));
+test.serial('plugins no updates are available for no plugins installed', async t => await t.is((await pluginsManager.checkForUpdates()), false));
 
 test.serial('plugins plugin install from file doesn\'t throw', async t => await t.notThrows(pluginsManager.installFromFile(join(__dirname, 'fixtures', 'pipam-homebrew.ppz'))));
 test.serial('plugins plugin install from invalid ppz throws', async t => await t.throws(pluginsManager.installFromFile(join(__dirname, 'fixtures', 'invalid.ppz')), null));
 
-test.serial('plugins no updates are available for plugins installed from a ppz', async t => await t.is((await pluginsManager.checkForUpdates()).length, 0));
+test.serial('plugins no updates are available for plugins installed from a ppz', async t => await t.is((await pluginsManager.checkForUpdates()), false));
 
 //await t.skip.notThrows(pluginsManager.install('pipam-apt'), 'plugin install from npm doesn\'t throw');
 

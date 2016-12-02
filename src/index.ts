@@ -658,6 +658,12 @@ app.on('ready', () => {
         } else {
           return Promise.resolve();
         }
+      }).then(() => {
+        return plugins.checkForUpdates().then(pluginUpdatesAvailable => {
+          if (pluginUpdatesAvailable) {
+            e.sender.send('pluginUpdatesAvailable');
+          }
+        });
       });
     });
     loadWindowMain();

@@ -127,10 +127,10 @@ input.on('submit', () => {
             ipcRenderer.removeListener('manager--update-progress', progressListener);
             setTimeout(() => {
               if (err) {
-                popup.status = 'Error while updateing package. Try again later';
+                popup.status = 'Error while updating package. Try again later';
                 popup.error = true;
               } else {
-                popup.status = 'Done updateing package';
+                popup.status = 'Done updating package';
                 popup.progress = 100;
               }
               popup.spinning = false;

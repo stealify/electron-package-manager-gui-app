@@ -1,14 +1,15 @@
 {
   "name": "pipam",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Pipam - The pluginable interface for package managers",
   "main": "index.js",
   "productName": "Pipam",
   "scripts": {
     "start": "./node_modules/.bin/electron ./app/index.js",
     "build": "node scripts/build.js",
+    "appDeps": "cd app && npm i && cd ..",
     "dist": "node scripts/dist.js",
-    "run": "npm run build && npm start",
+    "run": "npm run build && npm run appDeps && npm start",
     "test": "nyc --reporter=html --reporter=lcov --reporter=text ava",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
@@ -28,6 +29,7 @@
   "devDependencies": {
     "@types/mustache": "^0.8.29",
     "@types/node": "^6.0.46",
+    "@types/node-fetch": "^1.6.6",
     "@types/semver": "^5.3.30",
     "@types/tar": "^1.0.28",
     "@types/tmp": "0.0.31",
@@ -55,6 +57,7 @@
     "electron-squirrel-startup": "^1.0.0",
     "getos": "^2.8.2",
     "mustache": "^2.2.1",
+    "node-fetch": "^1.6.3",
     "npm": "^3.10.8",
     "semver": "^5.3.0",
     "tar": "^2.2.1",

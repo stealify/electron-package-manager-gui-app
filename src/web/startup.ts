@@ -22,7 +22,7 @@ import { version as appVersion } from '../package.json';
 //
 // constants that could change
 
-const appDownloadUrl = 'https://pipam.github.io/out/views/download/index.html';
+const appDownloadUrl = 'https://pipam.github.io/out/views/downloads/index.html';
 
 // end constants that could change
 //
@@ -271,6 +271,29 @@ ipcRenderer.on('wantsAbout', () => {
   aboutWin.on('ready-to-show', () => {
     aboutWin.show();
   });
+});
+
+ipcRenderer.on('pluginUpdatesAvailable', () => {
+  const updateToast = new ToastComponent({
+    title: 'Plugin updates available!',
+    text: 'There\'s some plugin updates available...',
+    actions: [
+      {
+        label: 'Let\'s go!',
+        onclick() {
+          settings.click();
+          updateToast.hide();
+        }
+      },
+      {
+        label: 'Nope',
+        onclick() {
+          updateToast.hide();
+        }
+      }
+    ]
+  });
+  toastManager.add(updateToast, false);
 });
 
 if (process.env.NODE_ENV !== 'testing') ipcRenderer.send('listeningOnIPC');

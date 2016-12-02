@@ -67,4 +67,5 @@ export interface PluginInfoObject {
   active: boolean;
   uninstallable: boolean;
   installType: InstallType;
+  upToDate: boolean;
 }
