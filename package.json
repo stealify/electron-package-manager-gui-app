@@ -1,6 +1,6 @@
 {
   "name": "pipam",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Pipam - The pluginable interface for package managers",
   "main": "index.js",
   "productName": "Pipam",
@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/pipam/pipam#readme",
   "devDependencies": {
+    "@types/chalk": "^0.4.31",
     "@types/mustache": "^0.8.29",
     "@types/node": "^6.0.46",
     "@types/node-fetch": "^1.6.6",
@@ -37,7 +38,6 @@
     "ava": "^0.17.0",
     "babel-core": "^6.18.2",
     "babel-preset-latest": "^6.16.0",
-    "chalk": "^1.1.3",
     "coveralls": "^2.11.15",
     "deep-assign": "^2.0.0",
     "directory-tree": "^1.1.1",
@@ -62,7 +62,8 @@
     "semver": "^5.3.0",
     "tar": "^2.2.1",
     "then-utils": "^1.4.0",
-    "tmp": "0.0.30"
+    "tmp": "0.0.30",
+    "chalk": "^1.1.3"
   },
   "build": {
     "appId": "com.pipam.pipam",

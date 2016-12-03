@@ -1,6 +1,6 @@
 {
   "name": "pipam",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Pipam - The pluginable interface for package managers",
   "main": "index.js",
   "productName": "Pipam",
@@ -32,6 +32,7 @@
     "semver": "^5.3.0",
     "tar": "^2.2.1",
     "then-utils": "^1.4.0",
-    "tmp": "0.0.30"
+    "tmp": "0.0.30",
+    "chalk": "^1.1.3"
   }
 }

@@ -18,6 +18,7 @@ import plugins from './lib/plugins';
 const menu = require('./menu.json');
 import loadMenu from './menu/loadMenu';
 import { ListType, PackageObject, ValidPackageObject } from './lib/plugins/pluginDefs';
+import logger from './lib/logger';
 
 const appJson = require('./app.json');
 let appCfg = appJson;
@@ -138,7 +139,7 @@ app.on('ready', () => {
     defaultPlugin = plugin;
   }).then(() => {
     return plugins.touchDir();
-  }).then(() => {
+  }).then<string>(() => {
     return config.get('lastActivePlugin');
   }).then(lastActivePlugin => {
     if (lastActivePlugin) {
@@ -285,12 +286,12 @@ app.on('ready', () => {
     ipcMain.on('updatePlugin', (e: Electron.Event, name: string) => {
       let isDone = false;
       let doneCb = () => {};
-      const prom = plugins.install(name);
+      const prom = plugins.update(name);
 
       const getLogsListener = () => {
         const tryLog = () => {
           if (isDone) return;
-          plugins.installLogs().then(stream => {
+          plugins.updateLogs().then(stream => {
             const chunkListener = (chunk: string | Buffer) => {
               e.sender.send('updatePlugin--log-chunk', String(chunk));
             };
@@ -317,6 +318,7 @@ app.on('ready', () => {
         isDone = true;
         doneCb();
         ipcMain.removeListener('updatePlugin--getLogs', getLogsListener);
+        logger.error(err);
         e.sender.send('updatePlugin--error', err.stack);
       });
     });
@@ -480,7 +482,7 @@ app.on('ready', () => {
       }
     });
     ipcMain.on('search--find', (e: Electron.Event, name: string) => {
-      plugins.activePlugin.search(name).then(list => {
+      (<any>plugins.activePlugin.search(name).then)((list: Promise<ReadableStream | PackageObject[]>) => {
         e.sender.send('search--find-result', 200);
         ipcMain.once('search--getList', () => {
           if (list instanceof ReadableStream) {

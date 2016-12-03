@@ -241,7 +241,7 @@ class PluginsManager {
     return Promise.resolve(streams.install);
   }
   update(plugin: string): Promise<void> {
-    return rmrf(joinPath(app.getPath('userData'), 'plugins', plugin)).then(() => {
+    return this.uninstall(plugin).then(() => {
       return this.install(plugin, true);
     });
   }
