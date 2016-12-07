@@ -80,7 +80,7 @@ const defaultPlugins: {
   },
   win32() {
     // not available yet
-    return null;
+    return Promise.resolve(null);
     /*return callWithPromiseOrCallback(commandExists, 'choco').then(exists => {
       if (exists) return 'chocolatey';
       return null;
