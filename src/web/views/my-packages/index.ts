@@ -170,11 +170,12 @@ function loadList() {
     });
     ipcRenderer.send('packages--getCategories');
 
-    listCache.cache = [];
     cards = [];
     //pkgNameIndex = {};
 
     if (listCache.cache) return chunkListener(null, listCache.cache);
+
+    listCache.cache = [];
 
     ipcRenderer.once('packages--list-chunk', () => {
       // on the first chunk
