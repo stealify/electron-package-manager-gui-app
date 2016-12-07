@@ -127,7 +127,7 @@ if (process.platform === 'win32' || process.platform === 'linux') {
 }
 
 function loadPluginList(): Promise<void> {
-  return new Promise((resolve, reject) => {
+  return new Promise<void>((resolve, reject) => {
     pluginSelect.setOptions([]);
     ipcRenderer.once('pluginList', (e, list: object[]) => {
       asyncFor(list, (i, item) => {
@@ -148,7 +148,6 @@ function loadPluginList(): Promise<void> {
 }
 
 ipcRenderer.on('reloadPlugins', loadPluginList);
-loadPluginList();
 
 ipcRenderer.on('firstTime', () => {
   const popup = new ActivityPopupComponent({
@@ -297,11 +296,12 @@ ipcRenderer.on('pluginUpdatesAvailable', () => {
 });
 
 if (process.env.NODE_ENV !== 'testing') ipcRenderer.send('listeningOnIPC');
+loadPluginList();
 
 window.fetch('https://api.github.com/repos/pipam/pipam/releases/latest').then(res => {
   if (!res.ok) return Promise.reject(new Error('Couldn\'t fetch latest release version'));
   return res.json();
-}).then(json => {
+}).then((json: object) => {
   const latestStr: string = (json.tag_name.startsWith('v')) ? json.tag_name.substr(1) : json.tag_name;
   if (semverGt(latestStr, appVersion as string)) {
     const updateToast = new ToastComponent({

@@ -10,7 +10,7 @@ const { BrowserWindow } = remote;
 import { normalize } from 'path';
 const { resCodes } = require('../../resources/messages.json');
 
-const random = (min, max) => (Math.floor(Math.random() * (max - min + 1)) + min);
+const random = (min: number, max: number) => (Math.floor(Math.random() * (max - min + 1)) + min);
 
 const inputCont = document.getElementById('manage--inputCont');
 const infoPlaceholder = document.getElementById('manage--infoCont-placeholder');
@@ -31,6 +31,8 @@ input.on('focus', () => {
 input.on('blur', () => {
   (<object>inputCont.dataset).size = 'normal';
 });
+
+let cacheI = null;
 
 input.on('submit', () => {
   input.blur();
@@ -56,11 +58,11 @@ input.on('submit', () => {
         });
         uninstallButton.on('click', () => {
           (<object>window).pageNavbar.setActiveItem(3);
-          (<object>window).pageNavManager.softNavigateTo(`${__dirname}/../uninstall/index.html`, res.name);
+          (<object>window).pageNavManager.softNavigateTo(`${__dirname}/../uninstall/index.html`, res.name, cacheI);
         });
         updateButton.on('click', () => {
           (<object>window).pageNavbar.setActiveItem(2);
-          (<object>window).pageNavManager.softNavigateTo(`${__dirname}/../update/index.html`, res.name);
+          (<object>window).pageNavManager.softNavigateTo(`${__dirname}/../update/index.html`, res.name, cacheI);
         });
         infoHeader.appendChild(document.createElement('br'));
         if (res.installed) {
@@ -85,10 +87,13 @@ input.on('submit', () => {
 
 input.prependTo(inputCont);
 
-(<object>window).onpageviewload = (data) => {
+(<object>window).onpageviewload = (data, cacheIndex) => {
   if (typeof data === 'string') {
     input.value = data;
     (<object>inputCont.dataset).size = 'normal';
     input.submit();
+  }
+  if (typeof cacheIndex === 'number') {
+    cacheI = cacheIndex;
   }
 };

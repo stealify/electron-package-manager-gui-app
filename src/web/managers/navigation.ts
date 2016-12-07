@@ -12,7 +12,7 @@ class NavigationManager {
     this.handlerKey = `onbefore${handlerPrefix}viewunload`;
     this.loadKey = `on${handlerPrefix}viewload`;
   }
-  navigateTo(url: string, extraData?: any): Promise<void> {
+  navigateTo(url: string, ...extraData): Promise<void> {
     if (window[this.handlerKey]) window[this.handlerKey]();
     window[this.handlerKey] = null;
     return callWithPromiseOrCallback(readFile, url, 'utf8').then((txt: string) => {
@@ -60,13 +60,13 @@ class NavigationManager {
         return Promise.resolve();
       });
     }).then(() => {
-      if (window[this.loadKey]) window[this.loadKey](extraData);
+      if (window[this.loadKey]) window[this.loadKey](...extraData);
       window[this.loadKey] = null;
     });
   }
-  softNavigateTo(url: string, extraData?: any) {
+  softNavigateTo(url: string, ...extraData) {
     if ((<object>this.elm.dataset).url === url) return Promise.resolve();
-    return this.navigateTo(url, extraData);
+    return this.navigateTo(url, ...extraData);
   }
 }
 

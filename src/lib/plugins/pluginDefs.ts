@@ -18,6 +18,7 @@ export interface PackageObject {
   installed?: boolean;
   upToDate?: boolean;
   categories?: string[];
+  removed?: boolean;
 }
 export interface ValidPackageObject {
   name: string;

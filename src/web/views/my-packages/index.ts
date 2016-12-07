@@ -11,15 +11,8 @@ import CardComponent from '../../components/card';
 import ButtonComponent from '../../components/button';
 import DropdownComponent from '../../components/dropdown';
 import LabelComponent from '../../components/label';
-
-interface PackageObject {
-  name: string;
-  version: string | number;
-  displayName?: string;
-  description?: string;
-  upToDate?: boolean;
-  categories?: string[];
-}
+import listCache from '../../managers/listCache';
+import { PackageObject } from '../../../lib/plugins/pluginDefs';
 
 type PackageFilter = (obj: PackageObject) => boolean;
 
@@ -29,6 +22,7 @@ const contPlaceholder = document.getElementById('myPackages--cardCont-placeholde
 const contBar = document.getElementById('myPackages--top-bar');
 const optView = document.getElementById('myPackages--optCont-view');
 const listTypeView = document.getElementById('myPackages--optCont-listType');
+const refreshView = document.getElementById('myPackages--optCont-refresh');
 
 const viewDropdown = new DropdownComponent({
   id: 'myPackages--optCont-viewDropdown'
@@ -36,10 +30,12 @@ const viewDropdown = new DropdownComponent({
 const listTypeDropdown = new DropdownComponent({
   id: 'myPackages--optCont-listTypeDropdown'
 });
+const refreshButton = new ButtonComponent({
+  text: 'Refresh'
+});
 
 let loadingList: boolean = false;
 
-let list: PackageObject[] = null;
 let cards: CardComponent[] = null;
 //let pkgNameIndex: object = {};
 
@@ -64,8 +60,8 @@ let listType = 0;
 
 viewDropdown.on('select', (opt: HTMLOptionElement, i: number) => {
   while (cards[0]) cards.shift().disown();
-  let lst = list;
-  lst = list.filter(filters[i]);
+  let lst = listCache.cache;
+  lst = listCache.cache.filter(filters[i]);
   chunkListener(null, lst);
 });
 listTypeDropdown.on('select', (opt: HTMLOptionElement, i: number) => {
@@ -80,10 +76,16 @@ listTypeDropdown.on('select', (opt: HTMLOptionElement, i: number) => {
   loadList();
 });
 
+refreshButton.on('click', () => {
+  listCache.cache = null;
+  loadList();
+});
+
 const chunkListener = (e, chunk: PackageObject[]) => {
   if (chunk.length === 0) return;
   const func = (i: number, item: PackageObject) => {
     if (!filters[viewDropdown.selected](item)) return;
+    if (item.removed) return;
     //if (pkgNameIndex[item.name]) return;
     
     //pkgNameIndex[item.name] = true;
@@ -101,7 +103,7 @@ const chunkListener = (e, chunk: PackageObject[]) => {
 
     manageButton.on('click', () => {
       (<object>window).pageNavbar.setActiveItem(4);
-      (<object>window).pageNavManager.softNavigateTo(`${__dirname}/../manage/index.html`, item.name);
+      (<object>window).pageNavManager.softNavigateTo(`${__dirname}/../manage/index.html`, item.name, listCache.cache.indexOf(item));
     });
 
     card.bodyElm.appendChild(document.createElement('br'));
@@ -140,7 +142,7 @@ const chunkListener = (e, chunk: PackageObject[]) => {
 };
 
 const concatListener = (e, chunk: PackageObject[]) => {
-  list.push(...chunk);
+  listCache.cache.push(...chunk);
 };
 
 let endListener = null;
@@ -168,9 +170,11 @@ function loadList() {
     });
     ipcRenderer.send('packages--getCategories');
 
-    list = [];
+    listCache.cache = [];
     cards = [];
     //pkgNameIndex = {};
+
+    if (listCache.cache) return chunkListener(null, listCache.cache);
 
     ipcRenderer.once('packages--list-chunk', () => {
       // on the first chunk
@@ -229,6 +233,7 @@ listTypeDropdown.setOptions(listTypes.map(obj => ({ name: obj }))).then(() => {
   return viewDropdown.setOptions(opts.map(obj => ({ name: obj })));
 }).then(() => {
   viewDropdown.appendTo(optView);
+  refreshButton.appendTo(refreshView);
   loadList();
 });
 

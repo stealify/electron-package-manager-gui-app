@@ -10,6 +10,7 @@ import {
 const { BrowserWindow } = remote;
 const { resCodes } = require('../../resources/messages.json');
 import { normalize } from 'path';
+import listCache from '../../managers/listCache';
 
 const random = (min, max) => (Math.floor(Math.random() * (max - min + 1)) + min);
 
@@ -32,6 +33,8 @@ input.on('focus', () => {
 input.on('blur', () => {
   (<object>inputCont.dataset).size = 'normal';
 });
+
+let cacheI = null;
 
 input.on('submit', () => {
   input.blur();
@@ -132,6 +135,7 @@ input.on('submit', () => {
               } else {
                 popup.status = 'Done uninstalling package';
                 popup.progress = 100;
+                if ((cacheI || cacheI === 0) && listCache.cache[cacheI]) listCache.cache[cacheI].removed = true;
               }
               popup.spinning = false;
               popup.close.shown = true;
@@ -167,10 +171,13 @@ input.on('submit', () => {
 
 input.prependTo(inputCont);
 
-(<object>window).onpageviewload = (data) => {
+(<object>window).onpageviewload = (data, cacheIndex) => {
   if (typeof data === 'string') {
     input.value = data;
     (<object>inputCont.dataset).size = 'normal';
     input.submit();
+  }
+  if (typeof cacheIndex === 'number') {
+    cacheI = cacheIndex;
   }
 };
