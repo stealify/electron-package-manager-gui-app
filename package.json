@@ -1,6 +1,6 @@
 {
   "name": "pipam",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Pipam - The pluginable interface for package managers",
   "main": "index.js",
   "productName": "Pipam",
