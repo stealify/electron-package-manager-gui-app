@@ -29,7 +29,7 @@
   "devDependencies": {
     "@types/chalk": "^0.4.31",
     "@types/mustache": "^0.8.29",
-    "@types/node": "^6.0.46",
+    "@types/node": "16.11.19",
     "@types/node-fetch": "^1.6.6",
     "@types/semver": "^5.3.30",
     "@types/tar": "^1.0.28",
