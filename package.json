@@ -34,7 +34,7 @@
     "@types/semver": "^5.3.30",
     "@types/tar": "^1.0.28",
     "@types/tmp": "0.0.31",
-    "@types/whatwg-fetch": "0.0.32",
+    "@types/whatwg-fetch": "0.0.33",
     "ava": "^0.17.0",
     "babel-core": "^6.18.2",
     "babel-preset-latest": "^6.16.0",
