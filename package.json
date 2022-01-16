@@ -40,7 +40,7 @@
     "babel-preset-latest": "^6.16.0",
     "coveralls": "^2.11.15",
     "deep-assign": "^2.0.0",
-    "directory-tree": "^1.1.1",
+    "directory-tree": "3.0.1",
     "electron": "^1.4.8",
     "electron-builder": "^8.6.0",
     "gauge": "^2.7.1",
