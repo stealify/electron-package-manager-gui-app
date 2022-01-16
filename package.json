@@ -41,7 +41,7 @@
     "coveralls": "3.1.1",
     "deep-assign": "^2.0.0",
     "directory-tree": "3.0.1",
-    "electron": "^1.4.8",
+    "electron": "16.0.7",
     "electron-builder": "^8.6.0",
     "gauge": "^2.7.1",
     "less": "^2.7.1",
