@@ -28,7 +28,7 @@
   "homepage": "https://github.com/pipam/pipam#readme",
   "devDependencies": {
     "@types/chalk": "0.4.31",
-    "@types/mustache": "0.8.32",
+    "@types/mustache": "4.1.2",
     "@types/node": "16.11.21",
     "@types/node-fetch": "1.6.9",
     "@types/semver": "7.3.9",
@@ -56,7 +56,7 @@
     "command-exists": "^1.0.2",
     "electron-squirrel-startup": "^1.0.0",
     "getos": "^2.8.2",
-    "mustache": "^2.2.1",
+    "mustache": "^4.0.0",
     "node-fetch": "^1.6.3",
     "npm": "^8.0.0",
     "semver": "^7.0.0",
