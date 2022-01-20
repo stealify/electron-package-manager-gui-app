@@ -49,7 +49,7 @@
     "mockery": "2.1.0",
     "nyc": "15.1.0",
     "then-utils": "1.6.0",
-    "typescript": "4.5.4"
+    "typescript": "4.5.5"
   },
   "dependencies": {
     "babel-polyfill": "^6.16.0",
