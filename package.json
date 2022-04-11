@@ -45,7 +45,7 @@
     "electron-builder": "22.14.5",
     "gauge": "4.0.0",
     "less": "4.1.2",
-    "marked": "4.0.10",
+    "marked": "4.0.14",
     "mockery": "2.1.0",
     "nyc": "15.1.0",
     "then-utils": "1.6.0",
