@@ -21,7 +21,7 @@
     "name": "facekapow",
     "email": "facekapow@outlook.com"
   },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/pipam/pipam/issues"
   },
